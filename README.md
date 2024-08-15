@@ -138,7 +138,53 @@ Response:
 
 ```
 
-### 2. Error Handling
+### 3. Comments
+List All Comments for a Post: `GET /posts/:post_id/comments`
+
+Header:
+```bash
+Authorization: Token your_auth_token
+```
+Response:
+```bash
+[
+  {
+    "id": 1,
+    "content": "Great post!",
+    "post_id": 1,
+    "created_at": "2024-08-15T12:45:56.789Z",
+    "updated_at": "2024-08-15T12:45:56.789Z"
+  },
+  ...
+]
+```
+
+Create a New Comment: `POST /posts/:post_id/comments`
+
+Request Header:
+```bash
+Authorization: Token your_auth_token
+```
+Request Body:
+```bash
+{
+  "comment": {
+    "content": "Great post!"
+  }
+}
+```
+Response:
+```bash
+{
+  "id": 2,
+  "content": "Great post!",
+  "post_id": 1,
+  "created_at": "2024-08-15T12:46:56.789Z",
+  "updated_at": "2024-08-15T12:46:56.789Z"
+}
+```
+
+### 4. Error Handling
 Unauthorized Access: If you try to create a post without logging in, you'll receive an error:
 
 Response:
@@ -148,11 +194,11 @@ Response:
 }
 ```
 
-Post Not Found: If you try to access a post that doesn't exist:
+Post or Comment Not Found: If you try to access a post or comment that doesn't exist:
 
 Response:
 ```bash
 {
-  "error": "Post not found"
+  "error": "Post not found" // or "Comment not found"
 }
 ```
