@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_request, only: [:index, :show]
 
   def index
-    @posts = Post.all
+    @posts = Post.page(params[:page]).per(10)
     render json: @posts
   end
 
